@@ -6,6 +6,5 @@ __pycache__/
 ~$*
 .obsidian/
 
-# Reportes de cada ejecución (se conservan los de reportes/pruebas como evidencia)
-reportes/*.md
-codigo_sistema_experto/reportes/
+# Reportes de cada ejecución (se conservan los de codigo/reportes/pruebas como evidencia)
+codigo/reportes/*.md

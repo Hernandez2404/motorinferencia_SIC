@@ -1,6 +1,6 @@
 # Bitácora de uso de IA
 
-Registro de las interacciones con IA durante el taller. Es la misma información del capítulo 4 y del Anexo A de `Informe_Taller_Sistema_Experto.docx`, más la columna "Resultado obtenido".
+Registro de las interacciones con IA durante el taller. Es la misma información del capítulo 4 y del Anexo A de `entrega/Informe_Taller_Sistema_Experto.docx`, más la columna "Resultado obtenido". Las entradas 13 a 15 son posteriores a la generación del informe.
 
 - **Herramienta:** Claude Code (CLI), con acceso a los archivos del proyecto
 - **Modelo:** Claude Opus 5.5 (`claude-opus-5-5`)
@@ -30,6 +30,8 @@ Registro de las interacciones con IA durante el taller. Es la misma información
 | 11 | Claude Opus 5.5 | **Decisión paso 8:** "A:2 B:1 C: aprobada". | Medio | No se ajustaron las prioridades (queda como hallazgo documentado), la IA redactó el borrador de aprendizajes y se generó el Word de 29 páginas sobre la plantilla, con índice actualizado y PDF. | Diferenciar entre documentar un hallazgo y modificar la base de conocimiento, y transparentar qué partes redactó la IA. |
 | 12 | Claude Opus 5.5 | **Ajuste:** guía de estudio en Markdown para la sustentación. | Alto | `guia_sustentacion.md`. | Sintetizar el trabajo en conceptos, flujo y decisiones para explicarlo con lenguaje técnico. |
 | 13 | Claude Opus 5.5 | **Ajuste:** "dame en una carpeta con solo los códigos necesarios". | Alto | Carpeta `codigo_sistema_experto/` con `sistema_experto.py`, `base_conocimiento.json`, `pruebas.py` y `casos/`; se verificó que funciona por sí sola. | Identificar los componentes mínimos de un sistema experto distribuible: el shell (motor), la base de conocimiento y los casos de prueba. |
+| 14 | Claude Opus 5.5 | **Ajuste:** "sube todo el proyecto al siguiente repositorio: https://github.com/Hernandez2404/motorinferencia_SIC.git". | Alto | Repositorio inicializado, `.gitignore` (excluye `__pycache__`, `.obsidian/` y reportes de cada ejecución), commit y push a `main`, verificado contra el remoto. | Versionar un proyecto académico: qué incluir y qué excluir (archivos generados y configuración personal). |
+| 15 | Claude Opus 5.5 | **Decisión:** "organiza las carpetas del proyecto, están un caos" → opción 1 (estructura propuesta y push). | Medio | Estructura `entrega/`, `codigo/`, `documentacion/` y `material_clase/` con README; se eliminaron los duplicados tras comprobar que eran idénticos; se movieron los archivos con `git mv` y se verificó con `pruebas.py`. | Organizar un proyecto por propósito y separar la entrega, el código ejecutable, la documentación y el material de referencia. |
 
 ---
 
@@ -60,3 +62,7 @@ Registro de las interacciones con IA durante el taller. Es la misma información
 23. **Revisión** → la IA genera el Word, el PDF y la guía; queda la revisión final del grupo.
 24. **Prompt de ajuste** → carpeta con solo los códigos necesarios.
 25. **Revisión** → carpeta `codigo_sistema_experto/` verificada (pruebas 6/6).
+26. **Prompt de ajuste** → subir el proyecto al repositorio de GitHub.
+27. **Revisión** → push verificado; la IA advierte que el PDF ya no estaba en la carpeta y pregunta si el repositorio es público.
+28. **Prompt de decisión** → organizar las carpetas: se aprueba la estructura propuesta y el push (opción 1).
+29. **Revisión** → reorganización verificada con `pruebas.py` y publicada en GitHub.

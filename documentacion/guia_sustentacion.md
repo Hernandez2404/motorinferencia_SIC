@@ -340,7 +340,7 @@ Caso combinado (síntomas de ddos + memoria):
 
 ## 13. Guion de demostración para la sustentación
 
-Ejecutar en la carpeta del proyecto, en PowerShell o CMD (Python 3).
+Ejecutar dentro de la carpeta `codigo/` (`cd codigo`), en PowerShell o CMD (Python 3, sin librerías adicionales).
 
 1. **El error del código original:**
    `python sistexpmotorinf2026.py`
@@ -398,15 +398,17 @@ Ejecutar en la carpeta del proyecto, en PowerShell o CMD (Python 3).
 
 | Archivo | Para qué |
 |---|---|
-| `Informe_Taller_Sistema_Experto.docx` / `.pdf` | **Informe de entrega** con la plantilla ASI (29 páginas) |
-| `sistema_experto.py` | Motor + carga + ingreso de hechos + explicación + `main` |
-| `base_conocimiento.json` | Base de conocimiento (estrategia, 42 hechos, 25 reglas) |
-| `casos/*.json` | 6 casos con resultados esperados |
-| `pruebas.py` | Pruebas automáticas y comparación de estrategias |
-| `reportes/pruebas/*.md` | Evidencia: un reporte por caso + `resumen_pruebas.md` |
-| `figuras/grafo_encadenamiento.png` | Figura 1 |
-| `bitacora_ia.md` | Bitácora de IA (con la columna "resultado obtenido") |
-| `sistexpmotorinf2026.py` | Motor original de la clase |
+| `entrega/Informe_Taller_Sistema_Experto.docx` | **Informe de entrega** con la plantilla ASI (29 páginas) |
+| `codigo/sistema_experto.py` | Motor + carga + ingreso de hechos + explicación + `main` |
+| `codigo/base_conocimiento.json` | Base de conocimiento (estrategia, 42 hechos, 25 reglas) |
+| `codigo/casos/*.json` | 6 casos con resultados esperados |
+| `codigo/pruebas.py` | Pruebas automáticas y comparación de estrategias |
+| `codigo/reportes/pruebas/*.md` | Evidencia: un reporte por caso + `resumen_pruebas.md` |
+| `codigo/sistexpmotorinf2026.py` | Motor original de la clase |
+| `documentacion/guia_sustentacion.md` | Esta guía |
+| `documentacion/bitacora_ia.md` | Bitácora de IA (con la columna "resultado obtenido") |
+| `documentacion/figuras/grafo_encadenamiento.png` | Figura 1 |
+| `material_clase/` | Contexto del curso y plantilla Word ASI |
 
 ### 15.2 Estructura del informe Word (páginas según el índice)
 
@@ -442,7 +444,7 @@ Todos deben dominar las secciones 1, 2, 3 y 10, porque son las más preguntadas.
 
 - [ ] `python pruebas.py` termina con "TODAS LAS PRUEBAS PASARON".
 - [ ] Revisaron y ajustaron la columna **Resultado de aprendizaje** de la bitácora: la redactó la IA como borrador.
-- [ ] El `.docx` y el `.pdf` están subidos antes de la clase.
+- [ ] El informe (`entrega/Informe_Taller_Sistema_Experto.docx`, o un PDF exportado desde Word) está subido antes de la clase.
 - [ ] Tienen a mano la numeración de la lista de síntomas (sección 11) para la demo.
 - [ ] Saben explicar la tabla del caso DDoS ciclo por ciclo (sección 10.2).
 - [ ] Saben decir por qué el orden de los criterios no cambia el conjunto final (sección 10.3).

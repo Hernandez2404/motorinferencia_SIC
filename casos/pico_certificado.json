@@ -1,0 +1,10 @@
+{
+  "descripcion": "Pico de demanda por campaña y certificado vencido",
+  "sintomas": ["cpu_alta", "trafico_alto", "evento_o_campana", "alerta_certificado"],
+  "esperado": {
+    "diagnosticos": ["diag_pico_demanda", "diag_certificado_invalido"],
+    "severidad": [],
+    "recomendaciones": ["rec_escalar", "rec_renovar_certificado"],
+    "reglas": ["R04", "R09", "R14", "R19", "R24"]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "descripcion": "Ataque de denegación de servicio que degrada el sitio",
+  "sintomas": ["cpu_alta", "trafico_alto", "trafico_origen_concentrado", "respuesta_lenta", "errores_5xx"],
+  "esperado": {
+    "diagnosticos": ["diag_ddos"],
+    "severidad": ["incidente_critico"],
+    "recomendaciones": ["rec_mitigar_ataque", "rec_plan_contingencia"],
+    "reglas": ["R02", "R04", "R10", "R16", "R20", "R25"]
+  }
+}

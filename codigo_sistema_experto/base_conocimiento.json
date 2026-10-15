@@ -1,0 +1,421 @@
+{
+  "dominio": "Diagnóstico de rendimiento y caídas de un servidor / aplicación web",
+  "version": "1.0",
+  "estrategia": {
+    "descripcion": "La refracción se aplica siempre como filtro. Luego se aplican los criterios en el orden indicado; el azar solo desempata al final. Prioridad por impacto: seguridad y caídas = 10, memoria y disco = 7, rendimiento = 5, mantenimiento = 3.",
+    "criterios": ["prioridad", "recencia", "especificidad", "azar"],
+    "semilla": 2026
+  },
+  "hechos": {
+    "respuesta_lenta": {
+      "tipo": "sintoma",
+      "categoria": "Disponibilidad",
+      "pregunta": "¿Las páginas tardan más de lo normal en responder (más de 3 segundos)?",
+      "texto": "Tiempos de respuesta superiores a lo normal"
+    },
+    "errores_5xx": {
+      "tipo": "sintoma",
+      "categoria": "Disponibilidad",
+      "pregunta": "¿Los usuarios reciben errores HTTP 5xx (500, 502, 503 o 504)?",
+      "texto": "Los usuarios reciben errores HTTP 5xx"
+    },
+    "sitio_no_disponible": {
+      "tipo": "sintoma",
+      "categoria": "Disponibilidad",
+      "pregunta": "¿El sitio no carga en absoluto (tiempo de espera agotado o conexión rechazada)?",
+      "texto": "El sitio no carga (timeout o conexión rechazada)"
+    },
+    "proceso_web_detenido": {
+      "tipo": "sintoma",
+      "categoria": "Disponibilidad",
+      "pregunta": "¿El servicio web o de la aplicación (nginx, apache, gunicorn, etc.) aparece detenido?",
+      "texto": "El proceso del servidor web / aplicación está detenido"
+    },
+    "cpu_alta": {
+      "tipo": "sintoma",
+      "categoria": "CPU y tráfico",
+      "pregunta": "¿El uso de CPU del servidor supera el 90 % de forma sostenida?",
+      "texto": "Uso de CPU sostenido por encima del 90 %"
+    },
+    "trafico_alto": {
+      "tipo": "sintoma",
+      "categoria": "CPU y tráfico",
+      "pregunta": "¿El volumen de peticiones está muy por encima de lo habitual?",
+      "texto": "Volumen de peticiones muy por encima de lo habitual"
+    },
+    "trafico_origen_concentrado": {
+      "tipo": "sintoma",
+      "categoria": "CPU y tráfico",
+      "pregunta": "¿La mayor parte del tráfico proviene de pocas direcciones IP o presenta patrones repetitivos anómalos?",
+      "texto": "Tráfico concentrado en pocas IP o con patrones anómalos"
+    },
+    "evento_o_campana": {
+      "tipo": "sintoma",
+      "categoria": "CPU y tráfico",
+      "pregunta": "¿Hay una campaña, lanzamiento o evento que explique un aumento legítimo de usuarios?",
+      "texto": "Existe una campaña o evento que explica más usuarios"
+    },
+    "memoria_alta": {
+      "tipo": "sintoma",
+      "categoria": "Memoria",
+      "pregunta": "¿El uso de memoria RAM supera el 90 %?",
+      "texto": "Uso de memoria RAM por encima del 90 %"
+    },
+    "swap_activa": {
+      "tipo": "sintoma",
+      "categoria": "Memoria",
+      "pregunta": "¿El servidor está usando memoria swap de forma intensiva?",
+      "texto": "Uso intensivo de memoria swap"
+    },
+    "memoria_crece_sin_liberarse": {
+      "tipo": "sintoma",
+      "categoria": "Memoria",
+      "pregunta": "¿El consumo de memoria de la aplicación crece continuamente con el tiempo aunque la carga sea estable?",
+      "texto": "La memoria de la aplicación crece sin liberarse"
+    },
+    "oom_en_logs": {
+      "tipo": "sintoma",
+      "categoria": "Memoria",
+      "pregunta": "¿Los logs del sistema muestran 'Out of memory' o procesos terminados por el OOM killer?",
+      "texto": "Los logs muestran eventos 'Out of memory' (OOM killer)"
+    },
+    "disco_lleno": {
+      "tipo": "sintoma",
+      "categoria": "Disco",
+      "pregunta": "¿Alguna partición del servidor está al 100 % (o casi) de su capacidad?",
+      "texto": "Partición de disco llena o casi llena"
+    },
+    "logs_crecen_rapido": {
+      "tipo": "sintoma",
+      "categoria": "Disco",
+      "pregunta": "¿Los archivos de log ocupan mucho espacio o crecen muy rápido?",
+      "texto": "Los archivos de log ocupan mucho espacio o crecen rápido"
+    },
+    "consultas_lentas_bd": {
+      "tipo": "sintoma",
+      "categoria": "Base de datos",
+      "pregunta": "¿El registro de consultas lentas de la base de datos muestra muchas consultas lentas?",
+      "texto": "Muchas consultas lentas en la base de datos"
+    },
+    "conexiones_bd_agotadas": {
+      "tipo": "sintoma",
+      "categoria": "Base de datos",
+      "pregunta": "¿La aplicación reporta 'too many connections' o el pool de conexiones agotado?",
+      "texto": "Pool de conexiones a la base de datos agotado"
+    },
+    "despliegue_reciente": {
+      "tipo": "sintoma",
+      "categoria": "Cambios y seguridad",
+      "pregunta": "¿Se desplegó una nueva versión de la aplicación en las últimas horas?",
+      "texto": "Se desplegó una nueva versión recientemente"
+    },
+    "alerta_certificado": {
+      "tipo": "sintoma",
+      "categoria": "Cambios y seguridad",
+      "pregunta": "¿El navegador muestra una advertencia de certificado SSL/TLS inválido o vencido?",
+      "texto": "El navegador advierte de un certificado SSL/TLS inválido"
+    },
+
+    "presion_memoria": {
+      "tipo": "intermedio",
+      "texto": "El servidor está bajo presión de memoria (RAM saturada y uso de swap)"
+    },
+    "servicio_degradado": {
+      "tipo": "intermedio",
+      "texto": "El servicio está degradado: responde lento y con errores"
+    },
+    "servicio_caido": {
+      "tipo": "intermedio",
+      "texto": "El servicio web está caído"
+    },
+    "sobrecarga_cpu": {
+      "tipo": "intermedio",
+      "texto": "La CPU está saturada por exceso de peticiones"
+    },
+    "cuello_botella_bd": {
+      "tipo": "intermedio",
+      "texto": "La base de datos es el cuello de botella del tiempo de respuesta"
+    },
+    "escritura_bloqueada": {
+      "tipo": "intermedio",
+      "texto": "El servidor no puede escribir en disco por falta de espacio"
+    },
+
+    "diag_fuga_memoria": {
+      "tipo": "diagnostico",
+      "texto": "Fuga de memoria en la aplicación"
+    },
+    "diag_caida_oom": {
+      "tipo": "diagnostico",
+      "texto": "Caída del servicio por falta de memoria (OOM)"
+    },
+    "diag_pico_demanda": {
+      "tipo": "diagnostico",
+      "texto": "Pico de demanda legítimo que supera la capacidad instalada"
+    },
+    "diag_ddos": {
+      "tipo": "diagnostico",
+      "texto": "Posible ataque de denegación de servicio (DDoS)"
+    },
+    "diag_saturacion_bd": {
+      "tipo": "diagnostico",
+      "texto": "Saturación de la base de datos (consultas lentas y pool de conexiones agotado)"
+    },
+    "diag_logs_sin_rotacion": {
+      "tipo": "diagnostico",
+      "texto": "Disco lleno por logs sin rotación"
+    },
+    "diag_regresion_despliegue": {
+      "tipo": "diagnostico",
+      "texto": "Regresión introducida por el último despliegue"
+    },
+    "diag_certificado_invalido": {
+      "tipo": "diagnostico",
+      "texto": "Certificado SSL/TLS vencido o mal configurado"
+    },
+
+    "incidente_critico": {
+      "tipo": "severidad",
+      "texto": "Incidente de severidad CRÍTICA: afecta la disponibilidad del servicio"
+    },
+
+    "rec_fuga_memoria": {
+      "tipo": "recomendacion",
+      "texto": "Perfilar la memoria de la aplicación (heap dump), corregir la fuga y, mientras tanto, programar reinicios controlados del servicio."
+    },
+    "rec_memoria": {
+      "tipo": "recomendacion",
+      "texto": "Reiniciar el servicio, aumentar la RAM o reducir el número de workers, y configurar límites de memoria por proceso."
+    },
+    "rec_escalar": {
+      "tipo": "recomendacion",
+      "texto": "Escalar horizontalmente (más instancias o autoescalado) y activar caché y CDN para el contenido estático."
+    },
+    "rec_mitigar_ataque": {
+      "tipo": "recomendacion",
+      "texto": "Activar rate limiting y WAF, bloquear las IP de origen del ataque y contactar al proveedor de protección anti-DDoS."
+    },
+    "rec_optimizar_bd": {
+      "tipo": "recomendacion",
+      "texto": "Revisar índices y planes de ejecución (EXPLAIN) de las consultas lentas, ampliar el pool de conexiones y agregar caché de consultas."
+    },
+    "rec_rotar_logs": {
+      "tipo": "recomendacion",
+      "texto": "Liberar espacio comprimiendo o eliminando logs antiguos y configurar la rotación automática (logrotate)."
+    },
+    "rec_rollback": {
+      "tipo": "recomendacion",
+      "texto": "Hacer rollback a la versión anterior y revisar los cambios incluidos en el último despliegue."
+    },
+    "rec_renovar_certificado": {
+      "tipo": "recomendacion",
+      "texto": "Renovar el certificado (por ejemplo con certbot / Let's Encrypt) y automatizar su renovación."
+    },
+    "rec_plan_contingencia": {
+      "tipo": "recomendacion",
+      "texto": "Notificar al equipo de guardia, publicar una página de mantenimiento y abrir el registro formal del incidente."
+    }
+  },
+  "reglas": [
+    {
+      "id": "R01",
+      "nombre": "Presión de memoria",
+      "prioridad": 7,
+      "antecedentes": ["memoria_alta", "swap_activa"],
+      "consecuentes": ["presion_memoria"],
+      "explicacion": "Con la RAM saturada el sistema recurre a la swap, lo que indica que la memoria física no alcanza."
+    },
+    {
+      "id": "R02",
+      "nombre": "Servicio degradado",
+      "prioridad": 5,
+      "antecedentes": ["respuesta_lenta", "errores_5xx"],
+      "consecuentes": ["servicio_degradado"],
+      "explicacion": "Lentitud combinada con errores 5xx significa que el servicio sigue arriba pero no atiende bien las peticiones."
+    },
+    {
+      "id": "R03",
+      "nombre": "Servicio caído",
+      "prioridad": 10,
+      "antecedentes": ["sitio_no_disponible", "proceso_web_detenido"],
+      "consecuentes": ["servicio_caido"],
+      "explicacion": "Si el sitio no carga y el proceso web está detenido, el servicio está fuera de línea."
+    },
+    {
+      "id": "R04",
+      "nombre": "Sobrecarga de CPU por tráfico",
+      "prioridad": 5,
+      "antecedentes": ["cpu_alta", "trafico_alto"],
+      "consecuentes": ["sobrecarga_cpu"],
+      "explicacion": "CPU alta junto con tráfico alto indica que la carga proviene del volumen de peticiones."
+    },
+    {
+      "id": "R05",
+      "nombre": "Cuello de botella en BD",
+      "prioridad": 5,
+      "antecedentes": ["consultas_lentas_bd", "respuesta_lenta"],
+      "consecuentes": ["cuello_botella_bd"],
+      "explicacion": "Si hay consultas lentas y la respuesta del sitio es lenta, el tiempo se está perdiendo en la base de datos."
+    },
+    {
+      "id": "R06",
+      "nombre": "Escritura bloqueada",
+      "prioridad": 7,
+      "antecedentes": ["disco_lleno"],
+      "consecuentes": ["escritura_bloqueada"],
+      "explicacion": "Sin espacio libre, la aplicación y el sistema no pueden escribir archivos, sesiones ni logs."
+    },
+    {
+      "id": "R07",
+      "nombre": "Fuga de memoria",
+      "prioridad": 7,
+      "antecedentes": ["presion_memoria", "memoria_crece_sin_liberarse"],
+      "consecuentes": ["diag_fuga_memoria"],
+      "explicacion": "La presión de memoria acompañada de un crecimiento continuo con carga estable es el patrón típico de una fuga."
+    },
+    {
+      "id": "R08",
+      "nombre": "Caída por falta de memoria (OOM)",
+      "prioridad": 7,
+      "antecedentes": ["presion_memoria", "oom_en_logs"],
+      "consecuentes": ["diag_caida_oom"],
+      "explicacion": "Bajo presión de memoria, el OOM killer del kernel termina procesos; los logs lo confirman."
+    },
+    {
+      "id": "R09",
+      "nombre": "Pico de demanda legítimo",
+      "prioridad": 5,
+      "antecedentes": ["sobrecarga_cpu", "evento_o_campana"],
+      "consecuentes": ["diag_pico_demanda"],
+      "explicacion": "La sobrecarga coincide con un evento que atrae usuarios reales: la capacidad instalada no alcanza."
+    },
+    {
+      "id": "R10",
+      "nombre": "Posible ataque DDoS",
+      "prioridad": 10,
+      "antecedentes": ["sobrecarga_cpu", "trafico_origen_concentrado"],
+      "consecuentes": ["diag_ddos"],
+      "explicacion": "Una sobrecarga producida por tráfico de pocas IP o con patrones repetitivos sugiere un ataque de denegación de servicio."
+    },
+    {
+      "id": "R11",
+      "nombre": "Saturación de la base de datos",
+      "prioridad": 5,
+      "antecedentes": ["cuello_botella_bd", "conexiones_bd_agotadas"],
+      "consecuentes": ["diag_saturacion_bd"],
+      "explicacion": "Las consultas lentas retienen conexiones y terminan agotando el pool: la base de datos está saturada."
+    },
+    {
+      "id": "R12",
+      "nombre": "Logs sin rotación",
+      "prioridad": 7,
+      "antecedentes": ["escritura_bloqueada", "logs_crecen_rapido"],
+      "consecuentes": ["diag_logs_sin_rotacion"],
+      "explicacion": "El disco se llenó y los logs son los que más crecen: falta una política de rotación."
+    },
+    {
+      "id": "R13",
+      "nombre": "Regresión por despliegue",
+      "prioridad": 5,
+      "antecedentes": ["servicio_degradado", "despliegue_reciente"],
+      "consecuentes": ["diag_regresion_despliegue"],
+      "explicacion": "La degradación aparece justo después de un despliegue, por lo que el cambio es la causa más probable."
+    },
+    {
+      "id": "R14",
+      "nombre": "Certificado SSL/TLS inválido",
+      "prioridad": 3,
+      "antecedentes": ["alerta_certificado"],
+      "consecuentes": ["diag_certificado_invalido"],
+      "explicacion": "La advertencia del navegador indica que el certificado venció o no corresponde al dominio."
+    },
+    {
+      "id": "R15",
+      "nombre": "Incidente crítico por caída",
+      "prioridad": 10,
+      "antecedentes": ["servicio_caido"],
+      "consecuentes": ["incidente_critico"],
+      "explicacion": "Un servicio fuera de línea afecta a todos los usuarios: se clasifica como incidente crítico."
+    },
+    {
+      "id": "R16",
+      "nombre": "Incidente crítico por ataque",
+      "prioridad": 10,
+      "antecedentes": ["diag_ddos", "servicio_degradado"],
+      "consecuentes": ["incidente_critico"],
+      "explicacion": "Un ataque que ya degrada el servicio requiere respuesta inmediata: se clasifica como incidente crítico."
+    },
+    {
+      "id": "R17",
+      "nombre": "Recomendación: fuga de memoria",
+      "prioridad": 7,
+      "antecedentes": ["diag_fuga_memoria"],
+      "consecuentes": ["rec_fuga_memoria"],
+      "explicacion": "Ante una fuga de memoria hay que localizarla en el código y contener su efecto mientras se corrige."
+    },
+    {
+      "id": "R18",
+      "nombre": "Recomendación: falta de memoria",
+      "prioridad": 7,
+      "antecedentes": ["diag_caida_oom"],
+      "consecuentes": ["rec_memoria"],
+      "explicacion": "Si el servicio cae por OOM hay que restablecerlo y ajustar la memoria disponible o el consumo."
+    },
+    {
+      "id": "R19",
+      "nombre": "Recomendación: escalar capacidad",
+      "prioridad": 5,
+      "antecedentes": ["diag_pico_demanda"],
+      "consecuentes": ["rec_escalar"],
+      "explicacion": "Una demanda legítima se atiende aumentando la capacidad, no bloqueando usuarios."
+    },
+    {
+      "id": "R20",
+      "nombre": "Recomendación: mitigar ataque",
+      "prioridad": 10,
+      "antecedentes": ["diag_ddos"],
+      "consecuentes": ["rec_mitigar_ataque"],
+      "explicacion": "Ante un posible DDoS hay que filtrar el tráfico malicioso en el borde de la red."
+    },
+    {
+      "id": "R21",
+      "nombre": "Recomendación: optimizar base de datos",
+      "prioridad": 5,
+      "antecedentes": ["diag_saturacion_bd"],
+      "consecuentes": ["rec_optimizar_bd"],
+      "explicacion": "La saturación de la base de datos se resuelve optimizando consultas y ajustando el pool."
+    },
+    {
+      "id": "R22",
+      "nombre": "Recomendación: rotar logs",
+      "prioridad": 7,
+      "antecedentes": ["diag_logs_sin_rotacion"],
+      "consecuentes": ["rec_rotar_logs"],
+      "explicacion": "Hay que liberar espacio de inmediato y evitar que el problema se repita con rotación automática."
+    },
+    {
+      "id": "R23",
+      "nombre": "Recomendación: rollback",
+      "prioridad": 5,
+      "antecedentes": ["diag_regresion_despliegue"],
+      "consecuentes": ["rec_rollback"],
+      "explicacion": "Revertir a la versión estable restablece el servicio mientras se analiza el cambio defectuoso."
+    },
+    {
+      "id": "R24",
+      "nombre": "Recomendación: renovar certificado",
+      "prioridad": 3,
+      "antecedentes": ["diag_certificado_invalido"],
+      "consecuentes": ["rec_renovar_certificado"],
+      "explicacion": "Un certificado válido devuelve la confianza del navegador y protege la comunicación."
+    },
+    {
+      "id": "R25",
+      "nombre": "Recomendación: plan de contingencia",
+      "prioridad": 10,
+      "antecedentes": ["incidente_critico"],
+      "consecuentes": ["rec_plan_contingencia"],
+      "explicacion": "Todo incidente crítico debe comunicarse y gestionarse formalmente mientras se aplica la solución técnica."
+    }
+  ]
+}

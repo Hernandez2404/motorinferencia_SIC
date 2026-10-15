@@ -1,0 +1,11 @@
+# Archivos generados por Python
+__pycache__/
+*.pyc
+
+# Archivos temporales de Office y configuración del editor
+~$*
+.obsidian/
+
+# Reportes de cada ejecución (se conservan los de reportes/pruebas como evidencia)
+reportes/*.md
+codigo_sistema_experto/reportes/

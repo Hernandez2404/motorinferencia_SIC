@@ -1,0 +1,10 @@
+{
+  "descripcion": "Sitio caído con el disco lleno por logs",
+  "sintomas": ["sitio_no_disponible", "proceso_web_detenido", "disco_lleno", "logs_crecen_rapido"],
+  "esperado": {
+    "diagnosticos": ["diag_logs_sin_rotacion"],
+    "severidad": ["incidente_critico"],
+    "recomendaciones": ["rec_rotar_logs", "rec_plan_contingencia"],
+    "reglas": ["R03", "R06", "R12", "R15", "R22", "R25"]
+  }
+}

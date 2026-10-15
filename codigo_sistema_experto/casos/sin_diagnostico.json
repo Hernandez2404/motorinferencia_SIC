@@ -1,0 +1,10 @@
+{
+  "descripcion": "Síntomas aislados sin diagnóstico concluyente",
+  "sintomas": ["memoria_alta", "consultas_lentas_bd"],
+  "esperado": {
+    "diagnosticos": [],
+    "severidad": [],
+    "recomendaciones": [],
+    "reglas": []
+  }
+}
